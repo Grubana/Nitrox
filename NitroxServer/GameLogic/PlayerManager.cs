@@ -9,6 +9,7 @@ using static NitroxServer.GameLogic.Players.PlayerData;
 using NitroxServer.Communication;
 using NitroxServer.UnityStubs;
 using NitroxModel.DataStructures.Util;
+using NitroxModel.Logger;
 
 namespace NitroxServer.GameLogic
 {
@@ -137,6 +138,18 @@ namespace NitroxServer.GameLogic
             {
                 foreach (Player player in ConnectedPlayers())
                 {
+                    try
+                    {
+                        if (packet is DeconstructionBegin || packet is ConstructionCompleted || packet is ConstructionAmountChanged || packet is DeconstructionCompleted)
+                        {
+                            Log.Info("Sending packet " + packet.ToString() + " to player " + player.Name);
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        
+                    }
                     player.SendPacket(packet);
                 }
             }
@@ -150,6 +163,18 @@ namespace NitroxServer.GameLogic
                 {
                     if (player != sendingPlayer)
                     {
+                        try
+                        {
+                            if (packet is DeconstructionBegin || packet is ConstructionCompleted || packet is ConstructionAmountChanged || packet is DeconstructionCompleted)
+                            {
+                                Log.Info("Sending packet " + packet.ToString() + " to player " + player.Name);
+                            }
+
+                        }
+                        catch (Exception ex)
+                        {
+                        
+                        }
                         player.SendPacket(packet);
                     }
                 }

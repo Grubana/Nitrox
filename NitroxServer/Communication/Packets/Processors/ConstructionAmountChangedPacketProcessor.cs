@@ -1,4 +1,5 @@
-﻿using NitroxModel.Packets;
+﻿using NitroxModel.Logger;
+using NitroxModel.Packets;
 using NitroxServer.Communication.Packets.Processors.Abstract;
 using NitroxServer.GameLogic;
 using NitroxServer.GameLogic.Bases;
@@ -18,6 +19,7 @@ namespace NitroxServer.Communication.Packets.Processors
 
         public override void Process(ConstructionAmountChanged packet, Player player)
         {
+            Log.Info("Construction changed "+packet.Guid +" "+packet.ConstructionAmount);
             baseData.BasePieceConstructionAmountChanged(packet.Guid, packet.ConstructionAmount);
             playerManager.SendPacketToOtherPlayers(packet, player);
         }

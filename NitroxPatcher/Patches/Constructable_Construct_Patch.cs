@@ -2,7 +2,9 @@
 using System.Reflection;
 using Harmony;
 using NitroxClient.GameLogic;
+using NitroxClient.GameLogic.Helper;
 using NitroxModel.Core;
+using NitroxModel.Logger;
 
 namespace NitroxPatcher.Patches
 {
@@ -15,6 +17,8 @@ namespace NitroxPatcher.Patches
         {
             if (!__instance._constructed && __instance.constructedAmount < 1.0f)
             {
+                
+           //     Log.InGame("Construction changed " + __instance.gameObject.GetGuid() + " " +__instance.constructedAmount);
                 NitroxServiceLocator.LocateService<Building>().ChangeConstructionAmount(__instance.gameObject, __instance.constructedAmount);
             }
 
@@ -25,6 +29,7 @@ namespace NitroxPatcher.Patches
         {
             if (__result && __instance.constructedAmount >= 1.0f)
             {
+                Log.InGame("Construction completed " + __instance.gameObject.GetGuid());
                 NitroxServiceLocator.LocateService<Building>().ConstructionComplete(__instance.gameObject);
             }
         }

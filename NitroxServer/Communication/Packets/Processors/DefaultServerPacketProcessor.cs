@@ -12,14 +12,14 @@ namespace NitroxServer.Communication.Packets.Processors
         private readonly PlayerManager playerManager;
 
         private readonly HashSet<Type> loggingPacketBlackList = new HashSet<Type> {
-            typeof(AnimationChangeEvent),
             typeof(Movement),
             typeof(VehicleMovement),
+            /*typeof(AnimationChangeEvent),
             typeof(ItemPosition),
             typeof(PlayerStats),
             typeof(PowerLevelChanged),
             typeof(VehicleColorChange),
-            typeof(StoryEventSend)
+            typeof(StoryEventSend)*/
         };
 
         public DefaultServerPacketProcessor(PlayerManager playerManager)
